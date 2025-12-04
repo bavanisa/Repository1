@@ -3,7 +3,8 @@ WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+# FIX: Replace invalid OpenJDK image
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/target/DevopsProject-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
